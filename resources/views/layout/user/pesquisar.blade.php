@@ -3,8 +3,8 @@
 @section('titulo', 'Pesquisar Contatos')
 @section('pesquisar')
 
-<form method="post" action="">
-    <input class="form-control form-control-lg" type="text" placeholder="Pesquisar" aria-label=".form-control-lg example">
+<form method="get" action="{{route('agenda.pesquisar')}}">
+    <input class="form-control form-control-lg" type="text" placeholder="Pesquisar" name="busca" aria-label=".form-control-lg example">
     <button> Buscar</button>
 </form>
 
@@ -19,7 +19,7 @@
         </tr>        
     <thead>
     <tbody>
-        @foreach ($userListar as $lista)
+        @foreach ($buscar as $lista)
             <tr>
                 <td>{{$lista->id}} </td>
                 <td>{{$lista->name}} </td>

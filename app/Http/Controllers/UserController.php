@@ -41,6 +41,16 @@ class UserController extends Controller
         $editar = DB::table('contatos')->where('id', $id)->first();
         return view ('layout/user/editar', compact('editar'));
     }
+    public function pesquisar(){
+        return view ('layout/user/pesquisar');
+    }
+    public function pesquisarContato(Request $request){
+        #$list = DB::table('contatos')->where('id', $id)->first();
+       
+        dd($request->busca);
+        #$editar = DB::table('contatos')->where('id', $id)->first();
+        #return view ('layout/user/pesquisar');
+    }
     public function atualizar(Request $request) {
         
         DB::table('contatos')->where('id', $request->id)->update([
@@ -50,6 +60,7 @@ class UserController extends Controller
         ]);
         return back()->with('EDITADO COM SUCESSO');
     }
+   
     public function deletUser($id){
         if(!isset($id)) {
             return back()->with('EDITADO COM SUCESSO');
@@ -60,8 +71,4 @@ class UserController extends Controller
 
     }
 
-    public function pesquisar(){
-        #$editar = DB::table('contatos')->where('id', $id)->first();
-        return view ('layout/user/pesquisar');
-    }
 }
