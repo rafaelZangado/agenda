@@ -4,8 +4,10 @@
 @section('pesquisar')
 
 <form method="get" action="{{route('agenda.buscar')}}">
-    <input class="form-control form-control-lg" type="text" placeholder="Pesquisar" name="busca" aria-label=".form-control-lg example">
-    <button> Buscar</button>
+    <div class="col">
+        <input class="form-control form-control-lg" type="text" placeholder="Digite o nome do contato" name="busca" aria-label=".form-control-lg example">
+        <button class="btn btn-primary btn-lg"> Buscar</button>
+    </div>
 </form>
 
 
