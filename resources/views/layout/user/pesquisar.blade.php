@@ -3,13 +3,13 @@
 @section('titulo', 'Pesquisar Contatos')
 @section('pesquisar')
 
-<form method="get" action="{{route('agenda.pesquisar')}}">
+<form method="get" action="{{route('agenda.buscar')}}">
     <input class="form-control form-control-lg" type="text" placeholder="Pesquisar" name="busca" aria-label=".form-control-lg example">
     <button> Buscar</button>
 </form>
 
 
-{{-- 
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -19,7 +19,7 @@
         </tr>        
     <thead>
     <tbody>
-        @foreach ($buscar as $lista)
+        @foreach ($busca as $lista)
             <tr>
                 <td>{{$lista->id}} </td>
                 <td>{{$lista->name}} </td>
@@ -32,7 +32,7 @@
             </tr>          
         @endforeach
     </tbody>
-</table> --}}
+</table>
 
 @endsection()
 

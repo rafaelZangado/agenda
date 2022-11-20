@@ -31,6 +31,7 @@ class UserController extends Controller
     
         #return ('layout/user/listar', $this->listar);
     }
+    
     public function listarUser(){
         $userListar = Contatos::all();
         // dd($user); 
@@ -41,16 +42,11 @@ class UserController extends Controller
         $editar = DB::table('contatos')->where('id', $id)->first();
         return view ('layout/user/editar', compact('editar'));
     }
-    public function pesquisar(){
-        return view ('layout/user/pesquisar');
+    public function pesquisar(Request $request){
+        $busca = contatos::where('name', 'LIKE', "%{$request->busca}%")->get();
+        return view ('layout/user/pesquisar', compact('busca'));
     }
-    public function pesquisarContato(Request $request){
-        #$list = DB::table('contatos')->where('id', $id)->first();
-       
-        dd($request->busca);
-        #$editar = DB::table('contatos')->where('id', $id)->first();
-        #return view ('layout/user/pesquisar');
-    }
+   
     public function atualizar(Request $request) {
         
         DB::table('contatos')->where('id', $request->id)->update([
