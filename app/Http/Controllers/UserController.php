@@ -18,24 +18,24 @@ class UserController extends Controller
     }
 
     public function salvar(Request $request){
-        #UserContatos::all(); 
-        
-        DB::table('contatos')->insert([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'fone'=>$request->fone
-        ]);
+
+        Contatos::create($request->all());
+
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $img = $request->image;
+            $extension = $img->extension();
+            $imgName = md5($img->image->getClientOriginalName() . strtotime("now")).".".$extension;
+            $img->move(public_path('img/perfil'), $imgName);
+            #$event->image = $imgName;
+        }
+       #return redirect('/layout/user/listar');
        
-       
-        return view ('layout/user/cadastrar');
+        return view ('layout/user/cadastrar')->with('sucesso', 'cadastrado com sucesso');
     
-        #return ('layout/user/listar', $this->listar);
     }
     
     public function listarUser(){
         $userListar = Contatos::all();
-        // dd($user); 
-        // $listar = DB::table('contatos')->get();   
         return view ('layout/user/listar',  compact('userListar'));
     }
     public function editarUser($id){
@@ -60,10 +60,9 @@ class UserController extends Controller
     public function deletUser($id){
         if(!isset($id)) {
             return back()->with('EDITADO COM SUCESSO');
-
         }
         DB::table('contatos')->where('id', $id)->delete();
-        return back()->with('ITEM DELETADO');
+        return back()->with('delet','ITEM DELETADO');
 
     }
 

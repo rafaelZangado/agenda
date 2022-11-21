@@ -17,7 +17,6 @@ Route::prefix('/agenda')->group(function(){
     Route::post('atualizar', [UserController::class,'atualizar'])->name('salvar.edit');
     Route::get('deletar/{id}', [UserController::class,'deletUser'])->name('deletar');
     Route::get('layout/user/buscar',[UserController::class, 'pesquisar'])->name('agenda.buscar');
-  #  Route::get('layout/user/buscar',[UserController::class, 'pesquisarContato'])->name('agenda.pesquisar');
 
 });
 
