@@ -3,9 +3,9 @@
 @section('titulo', 'Editar Contato')
 @section('formulario')
      
-    <form method="post" action="{{route('salvar.edit', $editar->id)}}"> 
+    <form method="POST" enctype="multipart/form-data" action="{{route('salvar.edit', $editar->id)}}"> 
         @csrf 
-        {{-- @method('PUT') --}}
+        {{-- @method('put') --}}
         <input type="text" name="name" value="{{$editar->name}}" placeholder="{{$editar->name}}">
         <input type="email" name="email" value="{{$editar->email}}" placeholder="{{$editar->email}}">
         <input type="text" name="fone" value="{{$editar->fone}}" placeholder="{{$editar->fone}}">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contatos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -18,8 +19,8 @@ class UserController extends Controller
     }
 
     public function salvar(Request $request){
-
-        Contatos::create($request->all());
+      
+      
 
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $img = $request->image;
@@ -28,7 +29,8 @@ class UserController extends Controller
             $img->move(public_path('img/perfil'), $imgName);
             #$event->image = $imgName;
         }
-       #return redirect('/layout/user/listar');
+        Contatos::create($request->all());
+     
        
         return view ('layout/user/cadastrar')->with('sucesso', 'cadastrado com sucesso');
     
@@ -39,7 +41,9 @@ class UserController extends Controller
         return view ('layout/user/listar',  compact('userListar'));
     }
     public function editarUser($id){
-        $editar = DB::table('contatos')->where('id', $id)->first();
+       
+        #$editar = DB::table('contatos')->where('id', $id)->first();
+        $editar = Contatos::where('id', $id)->first();
         return view ('layout/user/editar', compact('editar'));
     }
     public function pesquisar(Request $request){
@@ -47,14 +51,17 @@ class UserController extends Controller
         return view ('layout/user/pesquisar', compact('busca'));
     }
    
-    public function atualizar(Request $request) {
-        
-        DB::table('contatos')->where('id', $request->id)->update([
-            'name'=>$request->name,
-            'fone'=>$request->fone,
-            'email'=>$request->email,
+    public function update(Request $request, Contatos $editar) {
+        $input = $request->validate([
+            'name' => 'string|required',
+            'email' => 'string|required',
+            'fone' => 'int|required',
         ]);
-        return back()->with('EDITADO COM SUCESSO');
+      
+        $editar->fill($input);
+        $editar->save();
+        return Redirect::route(route:'agenda.listar');
+   
     }
    
     public function deletUser($id){
