@@ -15,10 +15,12 @@
         <div class="container text-center">
           <div class="row">
            
-            <div class="col-115">
+            <div class="col-115">            
+             
               <h1>@yield('titulo')</h1>
               <hr>
-              @yield('tabela')              
+              @include('components.msg') 
+              @yield('tabela')                          
               @yield('formulario')  
               @yield('pesquisar')           
             </div>

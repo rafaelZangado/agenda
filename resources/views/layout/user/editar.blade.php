@@ -2,7 +2,7 @@
 @section('title', 'Meus contatos')
 @section('titulo', 'Editar Contato')
 @section('formulario')
-     
+    
     <form method="POST" enctype="multipart/form-data" action="{{route('salvar.edit', $editar->id)}}"> 
         @csrf 
         {{-- @method('put') --}}

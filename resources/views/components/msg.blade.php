@@ -1,7 +1,7 @@
 @if(session('sucesso'))
-    <p> {{session('sucesso')}} </p>
+    <p><h2>{{ __('alerta/msg.user.sucesso') }}</h2></p>
 @endif
 
 @if(session('delet'))
-    <p>{{session('delet')}}</p>
+    <p> <h2>{{ __('alerta/msg.user.delet') }}</h2></p>
 @endif
