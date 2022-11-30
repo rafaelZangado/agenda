@@ -20,17 +20,20 @@ class UserController extends Controller
 
     public function salvar(Request $request){
       
-      
+        $input = $request->validate([
+            'name' => 'string|required',
+            'email' => 'string|required',
+            'fone' => 'int|required',
+            'avatar' => 'file',
+        ]);
+        $file = $input['avatar'];       
+        $path = $file->store('avatar');
+        
+        $input['avatar'] = $path;
 
-        if($request->hasFile('image') && $request->file('image')->isValid()){
-            $img = $request->image;
-            $extension = $img->extension();
-            $imgName = md5($img->image->getClientOriginalName() . strtotime("now")).".".$extension;
-            $img->move(public_path('img/perfil'), $imgName);
-            #$event->image = $imgName;
-        }
-        Contatos::create($request->all());
-     
+        
+        Contatos::create($input);
+        #Contatos::create($request->all());     
        
         return view ('layout/user/cadastrar')->with('sucesso', 'cadastrado com sucesso');
     
@@ -56,11 +59,13 @@ class UserController extends Controller
             'name' => 'string|required',
             'email' => 'string|required',
             'fone' => 'int|required',
+            'avatar' => 'file',
+
         ]);
       
         $editar->fill($input);
         $editar->save();
-        return Redirect::route(route:'agenda.listar');
+        return Redirect::route('agenda.listar');
    
     }
    

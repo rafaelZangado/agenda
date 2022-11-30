@@ -13,4 +13,7 @@ class Contatos extends Model
         'email',
         'fone'
     ];
+   
+
 }
+ 

@@ -6,6 +6,7 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
+            <th> Avatar </th>
             <th> Nome </th>
             <th> fone </th>
             <th> ação </th>
@@ -15,6 +16,8 @@
     <tbody>
         @foreach ($userListar as $lista)
             <tr>
+                <td><img src="storage/app/{{$lista->avatar}}" width='100'> {{$lista->avatar}} </td>
+                
                 <td>{{$lista->name}} </td>
                 <td>{{$lista->fone}} </td>
              

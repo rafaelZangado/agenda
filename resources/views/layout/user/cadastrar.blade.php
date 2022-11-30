@@ -6,7 +6,7 @@
     <form method="post" action="{{route('agenda.salvar')}}" enctype= multipart/form-data> 
         @csrf 
         <div class="mb-3">
-            <input type="file" class="form-label" name="image" >
+            <input type="file" class="form-label" name="avatar" >
         <div>
         <div class="mb-3">
             <input type="text" class="form-label" name="name" placeholder="nome">
